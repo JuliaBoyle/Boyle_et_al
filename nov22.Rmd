@@ -1,0 +1,78 @@
+---
+title: "Nov22"
+output: html_document
+---
+
+```{r}
+predprey<-predpreyaltered
+library(tidyverse)
+install.packages("plotly")
+library(plotly)
+```
+
+#Looking at latitude effect on prey and pred with colour longitude
+```{r}
+ggplot(data=predprey, aes(x=Latitude, y=Prey_mass, colour=Longitude))+
+  geom_point()
+ggplot(data=predprey, aes(x=Latitude, y=Predator_mass, colour=Longitude))+
+  geom_point()
+```
+
+#Looking at how data is distributed between longitude~latitude
+```{r}
+longlat<- lm(predprey$Latitude~predprey$Longitude)
+plot(longlat)
+```
+Very not regular, log transform?
+
+
+Linear model to test for changes in diversity of taxa based on lattitude
+```{r}
+predprey %>%
+  group_by(Prey_common_name, Latitude) %>% 
+  summarize(preycount=count(Prey_common_name) %>% 
+  ggplot(aes(x=Latitude, y=preycount))+
+  geom_point()
+
+predprey %>%
+group_by(Prey_common_name) %>% 
+  model<-lm(Prey_common_name~Latitude*Predator_common_name)
+lm(data=predprey, )
+    
+```
+
+Trying to see mean pred mass according to latitude 
+```{r}
+predprey %>%
+  group_by(Latitude) %>% 
+  summarize(meanpred= mean(Predator_mass)) %>% 
+  ggplot(.,aes(x=Latitude, y=Predator_mass))+
+  geom_point()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
