@@ -55,16 +55,20 @@ ggplot(data = predprey, aes(x = Prey_common_name)) +
 
 
 ```{r}
-a<- predprey %>%
- group_by(Latitude) %>% 
- mutate(length(unique(Predator_common_name)))
- 
-lma<-glm(length(unique(Predator_common_name))~Latitude, data=predprey)
-summary(lma)
- 
-b<- predprey %>%
- group_by(Latitude) %>% 
- mutate(length(unique(Prey_common_name)))
+#Looking at Species Richness at different Latitudes
+predprey %>%
+ group_by(Latitude) %>%
+ summarize(Predator_Species_Richness=length(unique(Predator_common_name))) %>% 
+  ggplot(aes(x= Latitude, y=Predator_Species_Richness))+
+  geom_point()+
+  geom_smooth(method='lm')
+
+predprey %>%
+ group_by(Latitude) %>%
+ summarize(Prey_Species_Richness=length(unique(Prey_common_name))) %>% 
+  ggplot(aes(x= Latitude, y=Prey_Species_Richness))+
+  geom_point()+
+  geom_smooth(method='lm')
 ```
 
 
