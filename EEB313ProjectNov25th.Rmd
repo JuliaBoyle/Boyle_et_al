@@ -47,6 +47,7 @@ Very not regular, log transform?
 #TRYING TO SEE TAXONOMIC DIV AT DIF LATITUDES
     
 ```{r}
+#Seeing the abundances of dif species sampled
 ggplot(data = predprey, aes(x = Predator_common_name)) +
   geom_bar()
 ggplot(data = predprey, aes(x = Prey_common_name)) +
